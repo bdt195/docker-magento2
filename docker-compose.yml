@@ -14,7 +14,7 @@ services:
     hostname: ${PHP_FPM_HOST_NAME}
     build:
       context: ./${PHP_VERSION}-fpm
-    image: ecomteck/magento2-php-fpm:${PHP_VERSION}
+    image: ecomteck/magento2-php:${PHP_VERSION}-fpm
     ports:
       - 9000
     volumes:
@@ -59,8 +59,8 @@ services:
   cli:
     hostname: ${PHP_CLI_HOST_NAME}
     build:
-      context: ./${PHP_VERSION}-fpm
-    image: ecomteck/magento2-php-cli:${PHP_VERSION}
+      context: ./${PHP_VERSION}-cli
+    image: ecomteck/magento2-php:${PHP_VERSION}-cli
     volumes:
       - ${APP_DIR}:/var/www/magento
     links:
@@ -84,8 +84,8 @@ services:
 
   cron:
     build:
-      context: ./${PHP_VERSION}-fpm
-    image: ecomteck/magento2-php-cli:${PHP_VERSION}
+      context: ./${PHP_VERSION}-cli
+    image: ecomteck/magento2-php:${PHP_VERSION}-cli
     hostname: ${PHP_CRON_HOST_NAME}
     command: run-cron
     environment:
